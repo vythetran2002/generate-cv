@@ -1,23 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Styles from "../styles/home.module.css";
-import { Grid, Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import OverviewBlock from "../components/OverviewBlock/OverviewBlock";
 import ProfileBlock from "../components/ProfileBlock/ProfileBlock";
 import CarreerGoalsBlock from "../components/CarreerGoalsBlock/CarreerGoalsBlock";
-import ExperiencesBlock from "../components/Experiences/ExperiencesBlock";
+import ExpSummaryBlock from "../components/Experiences/ExpSummaryBlock";
 import EducationBlock from "../components/EducationBlock/EducationBlock";
 import SkillBlock from "../components/SkillBlock/SkillBlock";
 import LanguageBlock from "../components/LanguageBlock/LanguageBlock";
 import RefereeBlock from "../components/RefereeBlock/RefereeBlock";
-import JobBlock from "../components/JobBlock/JobBlock";
 import customTheme from "../Theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import Template01 from "../components/CanvasTemplate/Template01/Template01";
 import ProjectBlock from "../components/ProjectBlock/ProjectBlock";
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import TemplateDownload01 from "../components/CanvasTemplate/Template01/TemplateDownload01";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   // useREf for template download
@@ -66,8 +65,7 @@ function App() {
   });
   const [experience, setExperience] = useState({
     exPosition: "Position",
-    fromMonth: "From month",
-    toMonth: "To Month",
+    expYear: 0,
     exCompany: "Company",
     desc: "Description",
   });
@@ -256,12 +254,57 @@ function App() {
     });
   };
 
+  // Toaster message function
+  // Avatar Updates
+  const notifyUpdateAvtSuccess = () =>
+    toast.success("Update image successfully");
+  const notifyDeleteAvtSuccess = () =>
+    toast.success("Delete image successfully");
+  // Skill Updates
+  const notifyAddSkillSuccess = () => toast.success("Add skill successfully");
+  const notifyDeleteSkillSuccess = () =>
+    toast.success("Delete skill successfully");
+  const notifyUpdateSkillSuccess = () =>
+    toast.success("Update skill successfully");
+  // Language Updates
+  const notifyAddLanguageSuccess = () =>
+    toast.success("Add language successfully");
+  const notifyDeleteLanguageSuccess = () =>
+    toast.success("Delete language successfully");
+  // Education Updates
+  const notifyAddEducationSuccess = () =>
+    toast.success("Add language successfully");
+  const notifyDeleteEducationSuccess = () =>
+    toast.success("Delete language successfully");
+  const notifyUpdateEducationSuccess = () =>
+    toast.success("Update language successfully");
+  // Work exp
+  const notifyAddProjectSuccess = () =>
+    toast.success("Add project successfully");
+  const notifyDeleteProjectSuccess = () =>
+    toast.success("Delete project successfully");
+  const notifyUpdateProjectSuccess = () =>
+    toast.success("Update project successfully");
+
   return (
     <>
       <Head>
         <title>WowCV - Cập nhật thông tin chi tiết</title>
       </Head>
+      <button onClick={notifyDeleteAvtSuccess}>Cl</button>
       <main className={Styles["app-container"]}>
+        <div>
+          <Toaster
+            toastOptions={{
+              style: {
+                marginTop: "0px",
+                backgroundColor: "black",
+                color: "white",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+              },
+            }}
+          />
+        </div>
         <ThemeProvider theme={customTheme}>
           <Grid container spacing={2}>
             {/* Left side */}
@@ -279,6 +322,8 @@ function App() {
                 onChangeSurName={updateSurName}
                 onChangeLastName={updateLastName}
                 onChangePosition={updatePosition}
+                onClickSave={notifyUpdateAvtSuccess}
+                onClickDeleteAvt={notifyDeleteAvtSuccess}
               />
               <ProfileBlock
                 dialingCode={dialingCode}
@@ -290,7 +335,7 @@ function App() {
                 onChangeNation={updateNation}
                 onChangeAddress={updateAddress}
               />
-              <ExperiencesBlock
+              <ExpSummaryBlock
                 experience={experience}
                 onChangeExperience={updateExperience}
               />
@@ -304,17 +349,25 @@ function App() {
                 skillList={skillList}
                 onRemoveSkill={deleteItemInSkillList}
                 onEditSkillItem={editItemSkillList}
+                onClickAdd={notifyAddSkillSuccess}
+                onClickDelete={notifyDeleteSkillSuccess}
+                onClickSave={notifyUpdateSkillSuccess}
               />
               <LanguageBlock
                 onChangeLanguage={updateLanguages}
                 onDeleteLanguageItem={deleteLanguagesItem}
                 languages={languages}
+                onClickAdd={notifyAddLanguageSuccess}
+                onClickDelete={notifyDeleteLanguageSuccess}
               />
               <EducationBlock
                 educations={educations}
                 onUpdateEducation={updateEducations}
                 onDeleteEducationItem={deleteEducations}
                 onEditEducations={editEducations}
+                onClickAdd={notifyAddEducationSuccess}
+                onClickSave={notifyUpdateEducationSuccess}
+                onClickDelete={notifyDeleteEducationSuccess}
               />
               <RefereeBlock
                 reference={reference}
@@ -325,6 +378,9 @@ function App() {
                 onUpdateProjectList={updateProjectList}
                 onDeleteProjectList={deleteItemProjectList}
                 onEditProjectList={editProjectList}
+                onClickAdd={notifyAddProjectSuccess}
+                onClickSave={notifyUpdateProjectSuccess}
+                onClickDelete={notifyDeleteProjectSuccess}
               />
             </Grid>
             {/* RightSide */}

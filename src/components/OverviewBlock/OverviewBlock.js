@@ -22,7 +22,8 @@ function OverviewBlock(props) {
     let value = e.target.value;
     if (isOnlyCharacterString(value) == true && value != "") {
       props.onChangeSurName(value);
-      inputSurnameLocator.current.style.border = "1px solid rgb(196, 196, 196)";
+      inputSurnameLocator.current.style.border =
+        "1px solid rgb(196, 196, 196) ";
       surnameWarning.current.style.display = "none";
     } else {
       inputSurnameLocator.current.style.border = "1px solid red";
@@ -62,6 +63,7 @@ function OverviewBlock(props) {
 
   const handlingClickDeleteAvatarSrc = () => {
     props.onDeleteAvatarSrc("");
+    props.onClickDeleteAvt();
   };
 
   return (
@@ -146,6 +148,7 @@ function OverviewBlock(props) {
               onChangeAvatarSrc={props.onChangeAvatarSrc}
               isOpenDialog={props.isOpenDialog}
               handlingCloseDialog={props.handlingCloseDialog}
+              onClickSave={props.onClickSave}
             />
           </Stack>
           {/* Contains Information Form */}
@@ -159,7 +162,7 @@ function OverviewBlock(props) {
                 <div className={Style["position-relative"]}>
                   <input
                     ref={inputSurnameLocator}
-                    defaultValue={props.surName}
+                    placeholder="First name"
                     onChange={handlingChangeSurName}
                     className={Style["input"]}
                   ></input>
@@ -175,7 +178,7 @@ function OverviewBlock(props) {
                 </div>
                 <div className={Style["position-relative"]}>
                   <input
-                    defaultValue={props.lastName}
+                    placeholder="Last name"
                     ref={inputLastNameLocator}
                     onChange={handlingChangeLastNAme}
                     className={Style["input"]}
@@ -192,7 +195,7 @@ function OverviewBlock(props) {
                 </div>
                 <div className={Style["position-relative"]}>
                   <input
-                    defaultValue={props.position}
+                    placeholder="Position"
                     ref={inputPositionLocator}
                     onChange={handlingChangePosition}
                     className={Style["input"]}

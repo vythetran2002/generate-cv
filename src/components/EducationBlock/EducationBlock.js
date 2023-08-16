@@ -110,6 +110,7 @@ function EducationBlock(props) {
       majorInputLocator.current.focus();
       schoolInputLocator.current.value = "";
       descInputLocator.current.value = "";
+      props.onClickAdd();
     } else if (props.educations.length >= 4) {
       limitWarningBlockRef.current.style.display = "block";
     } else {
@@ -158,6 +159,7 @@ function EducationBlock(props) {
       majorInputLocator.current.focus();
       schoolInputLocator.current.value = "";
       descInputLocator.current.value = "";
+      props.onClickSave();
     } else {
       missingWarningBlockRef.current.style.display = "block";
       if (majorInputLocator.current.value == "") {
@@ -195,6 +197,7 @@ function EducationBlock(props) {
                         majorRef={majorInputLocator}
                         schoolRef={schoolInputLocator}
                         descRef={descInputLocator}
+                        onClickDelete={props.onClickDelete}
                       />
                     </React.Fragment>
                   );
@@ -207,6 +210,7 @@ function EducationBlock(props) {
                 </div>
                 <div className={Styles["position-relative"]}>
                   <input
+                    placeholder="Major"
                     ref={majorInputLocator}
                     onChange={handlingChangeMajorInput}
                     className={Styles["input"]}
@@ -224,6 +228,7 @@ function EducationBlock(props) {
                 </div>
                 <div className={Styles["position-relative"]}>
                   <input
+                    placeholder="University"
                     ref={schoolInputLocator}
                     onChange={handlingChangeSchoolInput}
                     className={Styles["input"]}
