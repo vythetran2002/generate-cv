@@ -1,4 +1,5 @@
 .app-container {
+  font-family: "Roboto", Tahoma, Geneva, Verdana, sans-serif !important;
   padding: 16px;
 }
 .button-wrapper {
@@ -46,7 +47,59 @@
 }
 
 .cv-Download-container {
+  width: 595px;
   margin-top: 50px;
   position: absolute;
+  height: 842px;
   visibility: hidden;
+}
+.header-container {
+  width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.header-title {
+  text-align: center;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 8px;
+}
+.header-desc {
+  text-align: center;
+}
+.cv-menu-container {
+  display: grid;
+  box-sizing: border-box;
+  padding: 50px;
+  width: 100%;
+  height: 100%;
+  margin-top: 50px;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, 497px);
+  gap: 50px;
+}
+.cv-item {
+  background-color: rgb(240, 242, 248);
+  box-sizing: border-box;
+  padding: 32px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+.cv-item:hover {
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+}
+.img-preview {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.img-preview-wrapper {
+  position: relative;
+  background-color: green;
+  width: 100%;
+  height: 100%;
 }
